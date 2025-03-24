@@ -20,6 +20,9 @@ export class AppComponent {
   // UC4
   userName: string = "";
 
+  // UC5
+  nameError: string = "";
+
   // UC1
   ngOnInit() : void {
     this.title = "Hello from BridgeLabz!";
@@ -29,5 +32,18 @@ export class AppComponent {
   onClick(event : Event){
     console.log("Save button is clicked : ", event);
     window.open(this.url, "_blank");
+  }
+
+  // UC5
+  onInput(event : Event){
+    console.log("Change event occurred!", (event.target as HTMLInputElement).value);
+    const nameRegex = RegExp('^[A-Z]{1}[a-zA-Z\\s]{2,}$');
+    if(nameRegex.test(this.userName)){
+      this.nameError = "";
+      return;
+    }
+    else{
+      this.nameError = "Name is Incorrect!";
+    }
   }
 }
